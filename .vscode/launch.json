@@ -1,0 +1,22 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Debug",
+      "runtimeExecutable": "npm",
+      "cwd": "${workspaceFolder}/src",
+      "outputCapture": "std",
+      "sourceMaps": true,
+      "args": [
+        "run",
+        "debug:nodemon"
+      ],
+      "env": {
+        "NODE_ENV": "dev"
+      },
+      
+    }
+  ]
+}
