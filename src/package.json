@@ -4,7 +4,7 @@
   "description": "This is a Products Service",
   "main": "index.js",
   "scripts": {
-    "debug:nodemon": "nodemon --config nodemon-debug.json",
+    "debug:nodemon": "nodemon --config nodemon-debug.json --watch ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "type": "ts --init"
   },

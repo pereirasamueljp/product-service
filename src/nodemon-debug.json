@@ -2,11 +2,11 @@
     "watch": [
         "src"
     ],
-    "ext": "ts",
+    "ext": "js, json, ts",
     "ignore": [
         "src/**/*.spec.ts"
     ],
     "delay": "80ms",
-    "exec": "kill-port --port 9229 && node --inspect=0.0.0.0:9229 -r ts-node/register main.ts",
+    "exec": "kill-port --port 9229 && node --inspect=0.0.0.0:9229 -r ts-node/register main.ts -e ts",
     "inspect": true
 }
