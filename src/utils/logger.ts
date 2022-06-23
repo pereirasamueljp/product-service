@@ -1,10 +1,10 @@
 import { createLogger, format, Logger, transports } from 'winston';
 
 export class logger {
-    private static loggerService: Logger = null;
+    private static loggerService: Logger;
     static debug(debugText: string) {
         this.createLoggerService()
-        if (process.env.DEBUG === 'true') this.loggerService.info(debugText)
+        if (process.env.DEBUG == 'true') this.loggerService.debug(debugText)
     }
     static info(infoText: string) {
         this.createLoggerService()
@@ -19,8 +19,7 @@ export class logger {
         this.loggerService.warn(warnText)
     }
     private static createLoggerService() {
-        this.createLoggerService()
-        if (this.loggerService == null) {
+        if (!this.loggerService) {
             this.loggerService = createLogger({
                 format: format.combine(
                     format.timestamp({
@@ -28,7 +27,8 @@ export class logger {
                     }),
                 ),
                 transports: [
-                    new transports.Console()
+                    new transports.Console(),
+                    new (transports.File)({ filename: '../out/log.log' })
                 ]
             })
         }

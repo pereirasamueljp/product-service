@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "type": "pwa-node",
+      "type": "node",
       "request": "launch",
       "name": "Debug",
       "runtimeExecutable": "npm",
@@ -14,9 +14,9 @@
         "debug:nodemon"
       ],
       "env": {
+        "DEBUG": "true",
         "NODE_ENV": "dev"
       },
-      
     }
   ]
 }
