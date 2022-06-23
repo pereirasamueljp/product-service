@@ -1,0 +1,176 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Product Service Api",
+        "description": "Api Doc",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Samuel Pereira",
+            "email": "pereirasamueljp@gmail.com",
+            "url": "https://github.com/pereirasamueljp/"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Products",
+            "description": "API get products in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all products in system according to the parameters",
+                "parameters": [
+                    {
+                        "name": "skip",
+                        "in": "url",
+                        "type": "integer",
+                        "description": "Skip to chosen number of the product list"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "url",
+                        "type": "integer",
+                        "description": "Limit of product list"
+                    },
+                    {
+                        "name": "sortByLowToHigh",
+                        "in": "url",
+                        "type": "integer",
+                        "description": "Sort the product list low to high"
+                    },
+                    {
+                        "name": "sortByPrice",
+                        "in": "url",
+                        "type": "integer",
+                        "description": "Sort the product list by price"
+                    },
+                    {
+                        "name": "sortByAlphabet",
+                        "in": "url",
+                        "type": "integer",
+                        "description": "Sort the product list by alphabet"
+                    },
+                    {
+                        "name": "category",
+                        "in": "url",
+                        "type": "integer",
+                        "description": "Get product from some category"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Data"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Product": {
+            "required": [
+                "id",
+                "title",
+                "shortDescription",
+                "price",
+                "description",
+                "thumbnail",
+                "images",
+                "availableQuantity",
+                "measureName"
+            ],
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "uniqueItems": true
+                },
+                "title": {
+                    "type": "string"
+                },
+                "shortDescription": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "thumbnail": {
+                    "type": "string"
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "availableQuantity": {
+                    "type": "number"
+                },
+                "measureName": {
+                    "type": "string"
+                },
+                "measure": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "sizes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "colors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "category": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Data": {
+            "type": "object",
+            "properties": {
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Product"
+                    }
+                },
+                "total": {
+                    "type": "boolean"
+                },
+                "limit": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
