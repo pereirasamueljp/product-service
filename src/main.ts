@@ -1,9 +1,8 @@
-import express from 'express';
+import express, { query } from 'express';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express'
 import { logger } from './utils/logger';
 
-const loggertest = logger
 const swaggerJsonConf = require('./swagger.json')
 
 
@@ -14,9 +13,9 @@ app.use(cors())
 
 app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerJsonConf))
 app.get('/products', async (req, appRes) => {
-  loggertest.debug(`reciving the filters for products`)
+  logger.debug(`reciving the filters for products => ${JSON.stringify(req.query)}`)
+  if(req.query.limit == '0') throw new Error('Limit could not be zero');
   let url = urlQueryBuilder(req.query);
-
   let res = await fetch(url);
   if (res.ok) {
     let data = await res.json();
@@ -39,7 +38,7 @@ app.get('/products', async (req, appRes) => {
     appRes.send({ products, total, limit });
     return;
   }
-  appRes.status(500).send('Error loading products. Please, try again!');
+  throw Error('Error loading products. Please, try again!');
 
 })
 
@@ -59,6 +58,8 @@ function urlQueryBuilder(query: any) {
   }
   return mainUrl
 }
+
+
 
 app.listen(port, () => {
   console.log(`Server runing on port ${port}`)

@@ -1,36 +1,18 @@
-import { createLogger, format, Logger, transports } from 'winston';
-
+import moment from 'moment';
 export class logger {
-    private static loggerService: Logger;
     static debug(debugText: string) {
-        this.createLoggerService()
-        if (process.env.DEBUG == 'true') this.loggerService.debug(debugText)
+        if (process.env.DEBUG === 'true') console.debug(`DEBUG: ${this.getTimestamp()} | ${debugText}`);
     }
     static info(infoText: string) {
-        this.createLoggerService()
-        this.loggerService.info(infoText)
+        console.info(`INFO: ${this.getTimestamp()} | ${infoText}`);
     }
     static error(errorText: string) {
-        this.createLoggerService()
-        this.loggerService.error(errorText)
+        console.info(`ERROR: ${this.getTimestamp()} | ${errorText}`);
     }
     static warn(warnText: string) {
-        this.createLoggerService()
-        this.loggerService.warn(warnText)
+        console.info(`WARN: ${this.getTimestamp()} | ${warnText}`);
     }
-    private static createLoggerService() {
-        if (!this.loggerService) {
-            this.loggerService = createLogger({
-                format: format.combine(
-                    format.timestamp({
-                        format: 'DD/MM/YYYY HH:mm:ss'
-                    }),
-                ),
-                transports: [
-                    new transports.Console(),
-                    new (transports.File)({ filename: '../out/log.log' })
-                ]
-            })
-        }
+    private static getTimestamp() {
+        return moment().format('DD/MM/YYYY HH:mm:ss')
     }
 }
